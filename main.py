@@ -1,7 +1,6 @@
 import os
 from dotenv import load_dotenv
 from llama_index.llms.openai import OpenAI
-from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_index.core import VectorStoreIndex, Settings
 from llama_parse import LlamaParse
 from llama_index.core.node_parser import MarkdownElementNodeParser
@@ -18,11 +17,10 @@ def load_api_keys():
     
     return llama_cloud_key, openai_api_key
 
-def initialize_llm_and_embeddings():
-    embeddings = OpenAIEmbedding(model="text-embedding-3-small")
+def initialize_llm():
     llm = OpenAI(model="gpt-4o")
     Settings.llm = llm
-    return llm, embeddings
+    return llm
 
 def load_and_parse_documents(filepath, llm):
     documents = LlamaParse(result_type="markdown").load_data(filepath)
@@ -39,12 +37,11 @@ def create_query_engine(base_nodes, objects):
     return query_engine
 
 def main():
-
     llama_cloud_key, openai_api_key = load_api_keys()
-    llm, embeddings = initialize_llm_and_embeddings()
-    base_nodes, objects = load_and_parse_documents("data/article.pdf", llm)
+    llm = initialize_llm()
+    base_nodes, objects = load_and_parse_documents("data/Merged Cell Table.pdf", llm)
     query_engine = create_query_engine(base_nodes, objects)
-    query = "Who are the authors of the article?"
+    query = "What is the table about?"
     response = query_engine.query(query)
     print(response)
 
