@@ -1,0 +1,8 @@
+llama-parse 
+llama-index-embeddings-fastembed
+llama-index
+fastembed
+llama-index-vector-stores-qdrant
+qdrant_client
+llama-index-embeddings-ollama
+python-dotenv
