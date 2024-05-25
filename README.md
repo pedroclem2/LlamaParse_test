@@ -38,5 +38,5 @@ pip install -r requirements.txt
 ## Example
 
 **Prompt for Query & Formatted output**:
-   ![Output](images/screenshot_1.png)
+   ![Output](images_example/screenshot_1.png)
 
